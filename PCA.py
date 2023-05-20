@@ -68,26 +68,6 @@ e,V = e[:I],V[:,:I]
 # L_cum = cum_loadings(L)
 
 
-#Determine power of each log returns vector
-dct = {"Ticker":[],"Power":[]}
-for ticker in tickers:
-    
-    tickers_ = tickers.copy()
-    tickers_.remove(ticker)
-    lr_ = utils.get_log_returns(tickers_).to_numpy()
-    lr_ = utils.stan(lr_)
-    
-    e_,V_ = decompose(lr_)
-    power = pp - comp_prob(e_,I) #
-    
-    print(ticker, power)
-    
-    dct["Ticker"].append(ticker)
-    dct["Power"].append(power)
- 
-df = pd.DataFrame(dct).set_index("Ticker")
-print(df)
-
 # #Sanity check
 # pca = PCA(pp)
 # pca.fit(X)
